@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.spring.boot.dao.StudentDao">
+
+	<!-- Map结果 -->
+	<resultMap type="Student" id="allMap">
+		<result column="NAME" property="name"/><!-- 姓名 -->
+		<result column="AGE" property="age"/><!-- 年龄 -->
+		<result column="SEX" property="sex"/><!-- 性别 -->
+		<result column="HEIGHT" property="height"/><!-- 身高 -->
+		<result column="WEIGHT" property="weight"/><!-- 体重 -->
+	</resultMap>
+	
+	<!-- 获取所有学生信息数据 -->
+	<select id="listStudent" resultMap="allMap" >
+		SELECT * FROM springboot.student_table t1;
+	</select>
+	
+	<!-- 通过年龄限制获取学生信息数据 -->
+	<select id="listAgeLarge" resultMap="allMap" >
+		SELECT * FROM springboot.student_table t1 WHERE t1.AGE > #{baseAge};
+	</select>
+	
+	<!-- 通过性别限制获取学生信息数据 -->
+	<select id="listStudentSex" resultMap="allMap" >
+		SELECT * FROM springboot.student_table t1 WHERE t1.SEX = #{ifSex};
+	</select>
+	
+</mapper>
